@@ -1,0 +1,10 @@
+path: /content/drive/MyDrive/Colab Notebooks/project/wireworldYolo/datasets/
+train: element/train/images
+val: element/valid/images
+sliceWidth: 128
+names:
+    - RAM #! 讀寫記憶單元
+    - ROM #! 只讀記憶單元
+    - seven-segment display #! 七段顯示器
+    - half adder #! 半加器
+    - full adder #! 全加器

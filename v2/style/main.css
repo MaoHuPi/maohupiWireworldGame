@@ -1,0 +1,346 @@
+html {
+	--yellow: #f2dc9c;
+	--darkGreen: #517977;
+	--lightGreen: #95b3ab;
+	--brown: #927956;
+}
+
+* {
+	user-select: none;
+	outline: none;
+	scrollbar-width: thin;
+	scrollbar-color: #00000055 #48484855;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+    background-color: #48484855;
+	--width: 0.5vw;
+	width: var(--width);
+	height: var(--width);
+	padding: 1vw;
+}
+*::-webkit-scrollbar-thumb {
+    background: #00000055;
+	border-radius: 100vw;
+	margin: 1px;
+}
+
+.stepAsideParent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+	justify-content: space-between;
+}
+.stepAsideParent > * {
+	gap: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+	justify-content: center;
+}
+
+/* input */
+input, #sideBoxPages button {
+	color: var(--yellow);
+	font-size: 20px;
+	text-align: center;
+	background-color: var(--darkGreen);
+	border-color: var(--yellow);
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 2px;
+}
+input::selection {
+	background-color: var(--lightGreen);
+}
+.inputParent {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	position: relative;
+}
+.inputParent::after {
+	position: absolute;
+	top: 14px;
+	left: 16px;
+	content: attr(inputName);
+	color: var(--lightGreen);
+	font-size: 10px;
+}
+.inputParent > input {
+	width: calc(100% - 12px * 2);
+	height: calc(100% - 12px * 2);
+}
+
+html, body {
+	margin: 0px;
+	padding: 0px;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background-color: #202020;
+}
+
+#dropMask {
+	opacity: 0;
+	pointer-events: none;
+	box-shadow: 0px 0px 10vw 1vw gray inset;
+	background: repeating-linear-gradient( -45deg, #00000022 0, #00000022 1%, #ffffff22 1%, #ffffff22 2% );
+	transition: 0.5s;
+}
+#dropMask[dragover="true"] {
+    opacity: 1;
+}
+.mask {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+#contextmenu {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: stretch;
+    padding: 0vw;
+	position: fixed;
+	background-color: var(--darkGreen);
+	border-style: solid;
+	border-color: var(--yellow);
+	border-width: 2px;
+	border-radius: 2px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+#contextmenu[show]{
+	opacity: 1;
+	pointer-events: auto;
+}
+#contextmenu > button {
+	padding: 1px 5px;
+	color: var(--yellow);
+	font-size: 15px;
+	background-color: transparent;
+	border-style: solid;
+	border-width: 0px 0px 1px 0px;
+	border-color: var(--yellow);
+}
+
+/* interfaceBox */
+#interfaceBox {
+	--topBarHeight: 80px;
+	--bottomBarHeight: 80px;
+	--contentBoxHeight: calc(100vh - var(--topBarHeight) - var(--bottomBarHeight));
+	display: grid;
+	grid-template-columns: 100vw;
+	grid-template-rows: var(--topBarHeight) var(--contentBoxHeight) var(--bottomBarHeight);
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+#topBar {
+	grid-area: 1/1/2/2;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+#contentBox {
+	--linePos: 0.8;
+	--lineWidth: 10px;
+	--viewWidth: calc(100vw * var(--linePos) - var(--lineWidth)/2);
+	--sideBoxWidth: calc(100vw * (1 - var(--linePos)) - var(--lineWidth)/2);
+	grid-area: 2/1/3/2;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: var(--viewWidth) var(--lineWidth) var(--sideBoxWidth);
+	grid-template-rows: auto;
+	width: 100%;
+	height: var(--contentBoxHeight);
+}
+#contentBox[side="left"] {
+	grid-template-columns: var(--sideBoxWidth) var(--lineWidth) var(--viewWidth);
+}
+#bottomBar {
+	grid-area: 3/1/4/2;
+	overflow: hidden;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+/* topBar */
+:where(#topBar, #bottomBar) button {
+	--bgi: url("");
+	color: var(--yellow);
+	font-size: 40px;
+	background-color: transparent;
+	background-image: var(--bgi);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	transition: 0.5s;
+}
+:where(#topBar, #bottomBar) button[bgi] {
+	color: transparent !important;
+	font-size: 40px !important;
+}
+:where(#topBar, #bottomBar) button:hover {
+	font-size: 50px;
+	background-size: 110%;
+}
+#topBar button {
+	width: var(--topBarHeight);
+	height: var(--topBarHeight);
+}
+#hoverInfoBox {
+	--bgi: url("../image/hoverInfoBox.png");
+	width: calc(var(--topBarHeight) * 5);
+	height: var(--topBarHeight);
+	position: relative;
+	color: var(--yellow);
+	font-size: 20px;
+	text-align: center;
+	line-height: var(--topBarHeight);
+	background-color: transparent;
+	background-image: var(--bgi);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	overflow: hidden;
+}
+#hoverInfoBox * {
+	pointer-events: none;
+}
+#hoverInfoBox a {
+	--fontSize: 10px;
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	color: var(--lightGreen);
+	font-size: var(--fontSize);
+	line-height: var(--fontSize);
+	text-align: right;
+}
+
+/* contentBox */
+#view {
+	grid-area: 1/1/2/2;
+	width: 100%;
+	height: var(--contentBoxHeight);
+	/* background-color: #273c3b; */
+	background-color: #0b0b0b;
+	box-shadow: 0px 0px 0px 1px var(--yellow) inset;
+	/* box-shadow: 0px 0px 100px 1px var(--yellow) inset; */
+}
+#contentBox[side="left"] #view {
+	grid-area: 1/3/2/4;
+}
+#contentDividingLine {
+	grid-area: 1/2/2/3;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	transition: 0.5s;
+}
+#contentDividingLine:hover {
+	background-color: var(--darkGreen);
+}
+#sideBox {
+	--pageIndex: 0;
+	grid-area: 1/3/2/4;
+	width: var(--sideBoxWidth);
+	height: var(--contentBoxHeight);
+	overflow: hidden;
+}
+#contentBox[side="left"] #sideBox {
+	grid-area: 1/1/2/2;
+}
+#sideBoxPages {
+	display: grid;
+	grid-auto-columns: var(--sideBoxWidth);
+	grid-template-rows: var(--contentBoxHeight);
+	height: var(--contentBoxHeight);
+	transform: translateX(calc(var(--sideBoxWidth) * var(--pageIndex) * -1));
+	transition: 1s;
+}
+#sideBoxPages > div {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	width: var(--sideBoxWidth);
+	height: var(--contentBoxHeight);
+	color: white;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+/* bottomBar */
+#bottomBar button {
+	width: var(--bottomBarHeight);
+	height: var(--bottomBarHeight);
+}
+#playButton[status="play"] {
+	--bgi: url("../image/pauseBtn.png") !important;
+}
+#playButton[status="pause"] {
+	--bgi: url("../image/playBtn.png") !important;
+}
+#bottomBar .inputParent {
+	width: calc(2 * var(--bottomBarHeight));
+	height: var(--bottomBarHeight);
+}
+
+/* sideBox */
+#sideBox fieldset {
+	position: relative;
+}
+#sideBox fieldset .smallInput {
+	/* --shadowY: 0px; */
+	/* --shadowColor: white; */
+	padding: 0px;
+	width: var(--toolBar-buttonWidth);
+	height: var(--toolBar-buttonWidth);
+	font-size: 1vw;
+	/* background-color: white; */
+	border-style: solid;
+	/* border-color: black; */
+	border-radius: 0.2vw;
+	text-align: center;
+	box-shadow: 0px var(--shadowY) 0px 0px var(--shadowColor);
+	box-sizing: border-box;
+}
+#sideBox fieldset .smallInput:hover {
+	--shadowY: -0.5vw;
+	--shadowColor: var(--toolBar-backgroundColor);
+}
+#sideBox fieldset .smallInput[selected] {
+	--shadowY: -0.5vw;
+	--shadowColor: white;
+}
+#sideBox fieldset .bigInput {
+	width: 100%;
+	height: var(--toolBar-buttonWidth);
+	box-sizing: border-box;
+}
+#sideBox fieldset .bigInput[disabled] {
+	cursor: no-drop;
+}

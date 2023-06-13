@@ -1,0 +1,21 @@
+path: /content/drive/MyDrive/Colab Notebooks/project/wireworldYolo/datasets/
+train: component/train/images
+val: component/valid/images
+sliceWidth: 50
+names:
+    - button #! 按鈕
+    - lights #! 燈條
+    - CLK #! 定時器
+    - AND #! 且閘
+    - NAND #! 反且閘
+    - XAND #! 異域且閘
+    - XNAND #! 反異域且閘
+    - OR #! 或閘
+    - NOR #! 反或閘
+    - XOR #! 異域或閘
+    - XNOR #! 反異域或閘
+    - NOT #! 否閘
+    - tri-state #! 三態閘
+    - diode #! 二極管
+    - memory cell (read only) #! 只讀記憶單元
+    - memory cell (writable) #! 讀寫記憶單元

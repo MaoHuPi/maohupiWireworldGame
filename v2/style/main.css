@@ -56,6 +56,9 @@ input, #sideBoxPages button {
 	border-width: 2px;
 	border-radius: 2px;
 }
+:where(input, #sideBoxPages button):hover {
+	box-shadow: 0px 0px 10px 0px black inset !important;
+}
 input::selection {
 	background-color: var(--lightGreen);
 }
@@ -117,7 +120,7 @@ html, body {
 	border-color: var(--yellow);
 	border-width: 2px;
 	border-radius: 2px;
-    overflow: hidden;
+    /* overflow: hidden; */
     opacity: 0;
     pointer-events: none;
 }
@@ -129,10 +132,13 @@ html, body {
 	padding: 1px 5px;
 	color: var(--yellow);
 	font-size: 15px;
-	background-color: transparent;
+	background-color: var(--darkGreen);
 	border-style: solid;
 	border-width: 0px 0px 1px 0px;
 	border-color: var(--yellow);
+}
+#contextmenu > button:hover {
+	box-shadow: -4px 0px 0px 0px var(--yellow), 4px 0px 0px 0px var(--yellow);
 }
 
 /* interfaceBox */
@@ -314,18 +320,13 @@ html, body {
 	position: relative;
 }
 #sideBox fieldset .smallInput {
-	/* --shadowY: 0px; */
-	/* --shadowColor: white; */
 	padding: 0px;
 	width: var(--toolBar-buttonWidth);
 	height: var(--toolBar-buttonWidth);
 	font-size: 1vw;
-	/* background-color: white; */
 	border-style: solid;
-	/* border-color: black; */
 	border-radius: 0.2vw;
 	text-align: center;
-	box-shadow: 0px var(--shadowY) 0px 0px var(--shadowColor);
 	box-sizing: border-box;
 }
 #sideBox fieldset .smallInput:hover {

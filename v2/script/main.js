@@ -304,7 +304,7 @@
 	}
 	function lineVisibilityChange(){
 		lines.visible = !lines.visible;
-		lineVisibilityButton.innerText = lines.visible ? 'visible' : 'invisible';
+		lineVisibilityButton.innerText = lines.visible ? 'visible' : 'hidden';
 	}
 	let flagEditModeUpdate = false;
 	function changeEditMode(mode){
@@ -333,7 +333,7 @@
 	playSpeedInput.value = edit.playSpeed;
 	playStatusChange(false);
 	lineWidthInput.value = lines.width;
-	lineVisibilityButton.innerText = lines.visible ? 'visible' : 'invisible';
+	lineVisibilityButton.innerText = lines.visible ? 'visible' : 'hidden';
 	projectNameInput.value = edit.projectName;
 
 	// game

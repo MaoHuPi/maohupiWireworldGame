@@ -13,9 +13,12 @@ const tabButtons = $('#tabButtons');
 const sideBox = $('#sideBox');
 
 const playSpeedInput = $('#playSpeedInput');
-const lineVisibleButton = $('#lineVisibleButton');
+const lineVisibilityButton = $('#lineVisibilityButton');
 const lineWidthInput = $('#lineWidthInput');
 const projectNameInput = $('#projectNameInput');
+
+const exampleProjectsGithubButton = $('#exampleProjectsGithubButton');
+const maohupiInfoButton = $('#maohupiInfoButton');
 
 {
 	// define

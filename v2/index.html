@@ -32,33 +32,42 @@
 					<div>&lt;file panel&gt;
 						<fieldset>
 							<legend>project name</legend>
-							<input id="projectNameInput" type="text" style="width: 100%;">
+							<input id="projectNameInput" type="text" style="width: 100%;" info="file > project name">
 						</fieldset>
 						<fieldset>
 							<legend>project file</legend>
-							<button id="loadImportButton" class="smallInput" style="width: 100%;">open</button>
-							<button id="downloadExportButton" class="smallInput" style="width: 100%;">save</button>
+							<button id="loadImportButton" class="smallInput" style="width: 100%;" info="file > open project file">open</button>
+							<button id="downloadExportButton" class="smallInput" style="width: 100%;" info="file > save project file">save</button>
 						</fieldset>
 						<fieldset>
 							<legend>image file</legend>
-							<button id="loadImageButton" class="smallInput" style="width: 100%;">import</button>
-							<button id="downloadImageButton" class="smallInput" style="width: 100%;">export</button>
+							<button id="loadImageButton" class="smallInput" style="width: 100%;" info="file > import image file">import</button>
+							<button id="downloadImageButton" class="smallInput" style="width: 100%;" info="file > export image file">export</button>
 						</fieldset>
 					</div>
 					<div>&lt;edit panel&gt;</div>
 					<div>&lt;view panel&gt;
 						<fieldset>
-							<legend>line visible</legend>
-							<button id="lineVisibleButton" class="bigInput">
+							<legend>line visibility</legend>
+							<button id="lineVisibilityButton" class="bigInput" info="view > line visibility">
 						</fieldset>
 						<fieldset>
 							<legend>line width</legend>
-								<input id="lineWidthInput" class="bigInput" type="number">
+								<input id="lineWidthInput" class="bigInput" type="number" info="view > line width">
 						</fieldset>
 					</div>
 					<div>&lt;settings panel&gt;
 					</div>
-					<div>&lt;info panel&gt;</div>
+					<div>&lt;info panel&gt;
+						<fieldset>
+							<legend>made by</legend>
+							<button id="maohupiInfoButton" class="bigInput" info="info > MaoHuPi home page">MaoHuPi</button>
+						</fieldset>
+						<fieldset>
+							<legend>example projects</legend>
+							<button id="exampleProjectsGithubButton" class="bigInput" info="info > example projects (on github)">github</button>
+						</fieldset>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -86,29 +95,11 @@
 		<div group="made by">
 			<div style="color: #c6c6c6; text-align: center;">MaoHuPi</div>
 		</div>
-		<div group="edit mode">
-			<input id="editMode" class="bigInput" type="text" disabled>
-		</div>
 		<div group="cell type">
 			<button id="typeSwitch-0" class="smallInput">Y</button>
 			<button id="typeSwitch-1" class="smallInput">B</button>
 			<button id="typeSwitch-2" class="smallInput">R</button>
 		</div>
-		<div group="play status">
-			<button id="playStatus" class="bigInput">
-		</div>
-		<div group="play speed">
-			<!-- <input id="playSpeed" class="bigInput" type="number"> -->
-		</div>
-		<div group="line visible">
-			<button id="lineVisible" class="bigInput">
-		</div>
-		<div group="line width">
-			<input id="lineWidth" class="bigInput" type="number">
-		</div>
-		<div group="image i/o">
-		</div>
-		<div></div>
 	</div>
 	<div id="contextmenu"></div>
 	<div id="dropMask" class="mask"></div>

@@ -302,9 +302,9 @@
 		flagRun = targetValue;
 		playButton.setAttribute('status', flagRun ? 'play' : 'pause');
 	}
-	function lineVisibleChange(){
+	function lineVisibilityChange(){
 		lines.visible = !lines.visible;
-		lineVisibleBox.innerText = lines.visible ? 'visible' : 'invisible';
+		lineVisibilityButton.innerText = lines.visible ? 'visible' : 'invisible';
 	}
 	let flagEditModeUpdate = false;
 	function changeEditMode(mode){
@@ -333,7 +333,7 @@
 	playSpeedInput.value = edit.playSpeed;
 	playStatusChange(false);
 	lineWidthInput.value = lines.width;
-	lineVisibleButton.innerText = lines.visible ? 'visible' : 'invisible';
+	lineVisibilityButton.innerText = lines.visible ? 'visible' : 'invisible';
 	projectNameInput.value = edit.projectName;
 
 	// game
@@ -1006,5 +1006,11 @@
 		}
 		centered(() => {lines.width = parseInt(value);});
 	});
-	lineVisibleButton.addEventListener('click', lineVisibleChange);
+	lineVisibilityButton.addEventListener('click', lineVisibilityChange);
+	exampleProjectsGithubButton.addEventListener('click', () => {
+		window.open('https://github.com/MaoHuPi/maohupiWireworldGame/tree/main/exampleProject', '_blank');
+	});
+	maohupiInfoButton.addEventListener('click', () => {
+		window.open('https://github.com/MaoHuPi', '_blank');
+	});
 }

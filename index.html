@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<!-- 2023 © MaoHuPi -->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Wireworld Game Playground</title>
+	<link rel="stylesheet" href="style/main.css">
+	<script src="script/basic.js"></script>
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js"></script>
+	<div id="interfaceBox">
+		<div id="topBar" class="stepAsideParent">
+			<div id="tabButtons">
+				<button info="file">F</button>
+				<button info="edit">E</button>
+				<button info="view">V</button>
+				<button info="settings">S</button>
+				<button info="info">I</button>
+			</div>
+			<div>
+				<div id="hoverInfoBox" info="hover info box"></div>
+			</div>
+		</div>
+		<div id="contentBox" info="content box">
+			<canvas id="view" info="operating area" info-template="operating area<a>{editMode}</a>"></canvas>
+			<div id="contentDividingLine" info="dividing line<a>(drag)</a>"></div>
+			<div id="sideBox">
+				<div id="sideBoxPages">
+					<div>&lt;file panel&gt;
+						<fieldset>
+							<legend>project name</legend>
+							<input id="projectNameInput" type="text" style="width: 100%;" info="file > project name">
+						</fieldset>
+						<fieldset>
+							<legend>project file</legend>
+							<button id="loadImportButton" class="smallInput" style="width: 100%;" info="file > open project file">open</button>
+							<button id="downloadExportButton" class="smallInput" style="width: 100%;" info="file > save project file">save</button>
+						</fieldset>
+						<fieldset>
+							<legend>image file</legend>
+							<button id="loadImageButton" class="smallInput" style="width: 100%;" info="file > import image file">import</button>
+							<button id="downloadImageButton" class="smallInput" style="width: 100%;" info="file > export image file">export</button>
+						</fieldset>
+					</div>
+					<div>&lt;edit panel&gt;
+						<fieldset>
+							<legend>draw type</legend>
+							<button id="typeSwitch-0" class="smallInput" info="edit > draw with wire block">Y</button>
+							<button id="typeSwitch-1" class="smallInput" info="edit > draw with electric block">B</button>
+							<button id="typeSwitch-2" class="smallInput" info="edit > draw with stop block">R</button>
+						</fieldset>
+					</div>
+					<div>&lt;view panel&gt;
+						<fieldset>
+							<legend>line visibility</legend>
+							<button id="lineVisibilityButton" class="bigInput" info="view > line visibility">
+						</fieldset>
+						<fieldset>
+							<legend>line width</legend>
+							<input id="lineWidthInput" class="bigInput" type="number" info="view > line width">
+						</fieldset>
+						<fieldset>
+							<legend>named rect visibility</legend>
+							<button id="namedRectVisibilityButton" class="bigInput" info="view > named rect visibility">
+						</fieldset>
+					</div>
+					<div>&lt;settings panel&gt;
+					</div>
+					<div>&lt;info panel&gt;
+						<fieldset>
+							<legend>made by</legend>
+							<button id="maohupiInfoButton" class="bigInput" info="info > MaoHuPi home page">MaoHuPi</button>
+						</fieldset>
+						<fieldset>
+							<legend>example projects</legend>
+							<button id="exampleProjectsGithubButton" class="bigInput" info="info > example projects (on github)">github</button>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="bottomBar" class="stepAsideParent">
+			<div>
+				<button id="undoButton" bgi="undoBtn" info="undo<a>[Ctrl] + [Z]</a>">U</button>
+				<button id="redoButton" bgi="redoBtn" info="redo<a>[Ctrl] + [Shift] + [Z]</a>">R</button>
+				<button id="playButton" bgi="playBtn" info="play/pause<a>[Space]</a>">P</button>
+				<div class="inputParent" inputName="play speed">
+					<input id="playSpeedInput" class="bigInput" type="number" info="play speed">
+				</div>
+			</div>
+			<div>
+				<button id="cutButton" bgi="cutBtn" info="cut<a>[Ctrl] + [X]</a>">C</button>
+				<button id="copyButton" bgi="copyBtn" info="copy<a>[Ctrl] + [C]</a>">C</button>
+				<button id="pasteButton" bgi="pasteBtn" info="paste<a>[Ctrl] + [V]</a>">P</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="toolBar" style="opacity: 0; pointer-events: none;">
+		<div group="tool name">
+			<div style="color: #c6c6c6; text-align: center;">Wireworld Game Playground</div>
+		</div>
+		<div group="made by">
+			<div style="color: #c6c6c6; text-align: center;">MaoHuPi</div>
+		</div>
+	</div>
+	<div id="contextmenu"></div>
+	<div id="dropMask" class="mask"></div>
+	<script src="script/interface.js"></script>
+	<script src="script/main.js"></script>
+	<script src="script/fileIO.js"></script>
+	<script src="script/model.js"></script>
+</body>
+</html>

@@ -56,7 +56,8 @@ input, #sideBoxPages button {
 	border-width: 2px;
 	border-radius: 2px;
 }
-:where(input, #sideBoxPages button):hover {
+input:hover, 
+#sideBoxPages button:hover {
 	box-shadow: 0px 0px 10px 0px black inset !important;
 }
 input::selection {
@@ -190,7 +191,8 @@ html, body {
 }
 
 /* topBar */
-:where(#topBar, #bottomBar) button {
+#topBar button, 
+#bottomBar button {
 	--bgi: url("");
 	color: var(--yellow);
 	font-size: 40px;
@@ -204,11 +206,13 @@ html, body {
 	border-color: black;
 	transition: 0.5s;
 }
-:where(#topBar, #bottomBar) button[bgi] {
+#topBar button[bgi], 
+#bottomBar button[bgi] {
 	color: transparent !important;
 	font-size: 40px !important;
 }
-:where(#topBar, #bottomBar) button:hover {
+#topBar button:hover, 
+#bottomBar button:hover {
 	font-size: 50px;
 	background-size: 110%;
 }
@@ -273,6 +277,7 @@ html, body {
 }
 #sideBox {
 	--pageIndex: 0;
+	--toolBar-buttonWidth: 30px;
 	grid-area: 1/3/2/4;
 	width: var(--sideBoxWidth);
 	height: var(--contentBoxHeight);
@@ -317,6 +322,13 @@ html, body {
 
 /* sideBox */
 #sideBox fieldset {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+	gap: 10px;
 	position: relative;
 }
 #sideBox fieldset .smallInput {
@@ -329,13 +341,8 @@ html, body {
 	text-align: center;
 	box-sizing: border-box;
 }
-#sideBox fieldset .smallInput:hover {
-	--shadowY: -0.5vw;
-	--shadowColor: var(--toolBar-backgroundColor);
-}
 #sideBox fieldset .smallInput[selected] {
-	--shadowY: -0.5vw;
-	--shadowColor: white;
+	box-shadow: -2px 0px 0px 0px var(--yellow), 2px 0px 0px 0px var(--yellow) !important;
 }
 #sideBox fieldset .bigInput {
 	width: 100%;

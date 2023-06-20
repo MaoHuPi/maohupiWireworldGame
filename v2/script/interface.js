@@ -14,6 +14,7 @@ const sideBox = $('#sideBox');
 
 const playSpeedInput = $('#playSpeedInput');
 const lineVisibilityButton = $('#lineVisibilityButton');
+const namedRectVisibilityButton = $('#namedRectVisibilityButton');
 const lineWidthInput = $('#lineWidthInput');
 const projectNameInput = $('#projectNameInput');
 
@@ -68,36 +69,16 @@ const maohupiInfoButton = $('#maohupiInfoButton');
 		[mouse.x, mouse.y] = [event.pageX, event.pageY];
 		['flagContentDividingLine'].forEach(flag => mouse[flag] = false);
 	});
+	projectNameInput.addEventListener('change', () => {changeProjectName(projectNameInput.value);});
+	$('#loadImageButton').addEventListener('click', () => {importImage();});
+	$('#downloadImageButton').addEventListener('click', () => {exportImage(map);});
 }
 
-
-// tool bar
-// function selectButton(button){
-// 	$$('button', button.parentElement).forEach(b => {b.removeAttribute('selected')});
-// 	button.setAttribute('selected', '');
-// }
-// $$('[id^="typeSwitch-"]').forEach(button => {
-// 	let index = button.id.split('-')[1];
-// 	// button.style.backgroundColor = cellColor[index];
-// 	button.addEventListener('click', () => {
-// 		selectButton(button);
-// 		edit.cellType = index;
-// 	})
-// });
-// selectButton($(`[id="typeSwitch-${edit.cellType}"]`));
-// $$('[id^="typeSwitch-"]').forEach(button => {
-// 	let index = button.id.split('-')[1];
-// 	button.style.backgroundColor = cellColor[index];
-// 	button.addEventListener('click', () => {
-// 		selectButton(button);
-// 		edit.cellType = index;
-// 	})
-// });
-// selectButton($(`[id="typeSwitch-${edit.cellType}"]`));
-
-projectNameInput.addEventListener('change', () => {changeProjectName(projectNameInput.value);});
-$('#loadImageButton').addEventListener('click', () => {importImage();});
-$('#downloadImageButton').addEventListener('click', () => {exportImage(map);});
+// global
+function selectButton(button){
+	$$('button', button.parentElement).forEach(b => {b.removeAttribute('selected')});
+	button.setAttribute('selected', '');
+}
 
 // $$(':where(input[type="text"], input[type="number"])').forEach(input => {
 // 	input.addEventListener('keydown', event => {

@@ -170,3 +170,12 @@ function textOffset(text, delta = 1){
     return(text.split('\n').map(row => row.split('').map(char => String.fromCharCode(char.charCodeAt() + delta)).join('')).join('\n'));
 }
 function deepCopy(obj){return(JSON.parse(JSON.stringify(obj)));}
+function loadImageFromUrl(url){
+	return(new Promise(function (resolve, reject){
+		let img = new Image();
+		img.onload = () => {
+			resolve(img);
+		};
+		img.src = url;
+	}));
+}

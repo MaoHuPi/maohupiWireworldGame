@@ -53,6 +53,11 @@
 		visible: true, 
 		width: 2
 	}
+	const namedRects = {
+		fillColor: '#9e9e9e55', 
+		strokeColor: '#ffffff', 
+		visible: true
+	};
 	let backupList = [];
 	let backupIndex = 0;
 	function backup(){
@@ -229,7 +234,7 @@
 			[this.x, this.y] = [this.downX + posMouseNow[0] - posMouseDown[0], this.downY + posMouseNow[1] - posMouseDown[1]];
 			[this.endX, this.endY] = [this.endX + this.x, this.endY + this.y];
 		}
-		moveDone(){
+		getMovedMap(){
 			let tempMap = {};
 			let rectMap = this.getRangeData().map;
 			for(let cell in rectMap){
@@ -239,7 +244,10 @@
 				let value = rectMap[cell];
 				tempMap[`${pos[0]},${pos[1]}`] = value;
 			}
-			map = {...map, ...tempMap};
+			return(tempMap);
+		}
+		moveDone(){
+			map = {...map, ...this.getMovedMap()};
 		}
 		resetRect(){
 			['x', 'y', 'endX', 'endY', 'downX', 'downY', 'oriX', 'oriY'].forEach(attr => {
@@ -306,6 +314,10 @@
 		lines.visible = !lines.visible;
 		lineVisibilityButton.innerText = lines.visible ? 'visible' : 'hidden';
 	}
+	function namedRectVisibilityChange(){
+		namedRects.visible = !namedRects.visible;
+		namedRectVisibilityButton.innerText = namedRects.visible ? 'visible' : 'hidden';
+	}
 	let flagEditModeUpdate = false;
 	function changeEditMode(mode){
 		if(edit.editMode !== mode){
@@ -334,12 +346,13 @@
 	playStatusChange(false);
 	lineWidthInput.value = lines.width;
 	lineVisibilityButton.innerText = lines.visible ? 'visible' : 'hidden';
+	namedRectVisibilityButton.innerText = namedRects.visible ? 'visible' : 'hidden';
 	projectNameInput.value = edit.projectName;
 
 	// game
 	function gameUpdate(){
 		let newMap = {};
-		if(flagRun & edit.playSpeed > 0){
+		if(flagRun && edit.playSpeed > 0){
 			let R = 1;
 			for(let cell in map){
 				let pos = cell.split(',');
@@ -426,6 +439,7 @@
 	}
 	function drawComponent(){}
 	function getNamedRectsDrawFunction(){
+		if(!namedRects.visible) return([() => {}, () => {}]);
 		let drawList = [];
 		for(let range in nameData){
 			let pos = parsePos(range);
@@ -444,15 +458,15 @@
 		}
 		return([
 			() => {
-				viewCtx.fillStyle = '#9e9e9e55';
+				viewCtx.fillStyle = namedRects.fillColor;
 				for(let [range, rect] of drawList){
 					viewCtx.fillRect(...rect);
 				}
 			}, 
 			() => {
-				viewCtx.strokeStyle = '#ffffff';
+				viewCtx.strokeStyle = namedRects.strokeColor;
 				viewCtx.lineWidth = lines.width;
-				viewCtx.fillStyle = '#ffffff';
+				viewCtx.fillStyle = namedRects.strokeColor;
 				viewCtx.font = '20px Zpix';
 				for(let [range, rect] of drawList){
 					viewCtx.strokeRect(rect[0] - lines.width/2, rect[1] - lines.width/2, rect[2] + lines.width, rect[3] + lines.width);
@@ -669,7 +683,7 @@
 			if(targetType > -1){
 				edit.downCellType = targetType;
 				if(edit.cellType !== -1) edit.cellType = targetType;
-				// selectButton($(`[id="typeSwitch-${targetType}"]`));
+				selectButton($(`[id="typeSwitch-${targetType}"]`));
 			}
 			else if(keyValue == 'n') window.open(location.href, '_blank');
 			else{
@@ -729,10 +743,11 @@
 		clearBackup();
 		selectRect.resetRect();
 		componentRect.resetRect();
+		if(flagRun) backup();
 	}
 	function exportProject(){
 		return(JSON.stringify({
-			map: map, 
+			map: {...map, ...selectRect.getMovedMap(), ...componentRect.getMovedMap()}, 
 			nameData: nameData
 		}));
 	}
@@ -1006,7 +1021,26 @@
 		}
 		centered(() => {lines.width = parseInt(value);});
 	});
+	$$('[id^="typeSwitch-"]').forEach(button => {
+		let index = button.id.split('-')[1];
+		// button.style.backgroundColor = cellColor[index];
+		button.addEventListener('click', () => {
+			selectButton(button);
+			edit.cellType = index;
+		})
+	});
+	selectButton($(`[id="typeSwitch-${edit.cellType}"]`));
+	$$('[id^="typeSwitch-"]').forEach(button => {
+		let index = button.id.split('-')[1];
+		button.style.backgroundColor = cellColor[index];
+		button.addEventListener('click', () => {
+			selectButton(button);
+			edit.cellType = index;
+		})
+	});
+	selectButton($(`[id="typeSwitch-${edit.cellType}"]`));
 	lineVisibilityButton.addEventListener('click', lineVisibilityChange);
+	namedRectVisibilityButton.addEventListener('click', namedRectVisibilityChange);
 	exampleProjectsGithubButton.addEventListener('click', () => {
 		window.open('https://github.com/MaoHuPi/maohupiWireworldGame/tree/main/exampleProject', '_blank');
 	});

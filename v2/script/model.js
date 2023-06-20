@@ -8,7 +8,12 @@ let predictWidth = 224;
 
 async function modelTest(){
 	if(tfliteModel === undefined){
-		tfliteModel = await tflite.loadTFLiteModel('../model/output_float16.tflite');
+		try{
+			tfliteModel = await tflite.loadTFLiteModel('../model/output_float16.tflite');
+		}
+		catch(e){
+			tfliteModel = await tflite.loadTFLiteModel('model/output_float16.tflite');
+		}
 	}
 	let url = await new Promise(function (resolve, reject){
 		exportImage(false, true, url => {resolve(url);});

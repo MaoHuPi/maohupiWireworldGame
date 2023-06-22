@@ -9,6 +9,7 @@ let predictWidth = 224;
 async function modelTest(){
 	if(tfliteModel === undefined){
 		tfliteModel = await tflite.loadTFLiteModel('model/output_float16.tflite');
+		// tfliteModel = await tf.loadGraphModel('model/saved_model.pb');
 	}
 	let url = await new Promise(function (resolve, reject){
 		exportImage(false, true, url => {resolve(url);});
@@ -21,11 +22,13 @@ async function imagePredict(imgElement){
 		const img = tf.browser.fromPixels(imgElement);
 		const input = tf.sub(tf.div(tf.expandDims(img), 127.5), 1);
 		let outputTensor = tfliteModel.predict(input);
+		// let outputTensor = tfliteModel.execute({'input': input});
 		return(outputTensor);
 		// await outputTensor
 		// return tf.mul(tf.add(outputTensor, 1), 127.5)
 	});
-	data = await outputTensor.data();
+	// data = await outputTensor.data();
+	data = false;
 	console.log(outputTensor, data);
 }
 

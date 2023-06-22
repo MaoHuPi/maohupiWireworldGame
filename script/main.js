@@ -7,6 +7,8 @@
  * TODO
  */
 
+let addNameRect, clearNameRect;
+
 {
 	// basic
 	const view = $('#view'), 
@@ -807,8 +809,8 @@
 		};
 		input.click();
 	}
-	function recomputeEdge(map){
-		var poss = Object.keys(map).map(cell => cell.split(',').map(n => parseInt(n)));
+	function recomputeEdge(computeMap = map){
+		var poss = Object.keys(computeMap).map(cell => cell.split(',').map(n => parseInt(n)));
 		let xs = poss.map(l => l[0]), 
 			ys = poss.map(l => l[1]);
 		return([Math.min(...xs), Math.min(...ys), Math.max(...xs) + 1, Math.max(...ys) + 1]);
@@ -995,6 +997,15 @@
 		mouse.focusRect = componentRect;
 	}
 
+	// global method
+	addNameRect = function (x, y, endX, endY, name){
+		nameData[`${x},${y},${endX},${endY}`] = name;
+	}
+	clearNameRect = function (){
+		nameData = [];
+	}
+
+	// interface event listener
 	playButton.addEventListener('click', () => {playStatusChange(!flagRun);});
 	undoButton.addEventListener('click', undo);
 	redoButton.addEventListener('click', redo);

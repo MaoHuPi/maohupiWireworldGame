@@ -6,6 +6,8 @@ const playButton = $('#playButton');
 const cutButton = $('#cutButton');
 const copyButton = $('#copyButton');
 const pasteButton = $('#pasteButton');
+const predictComponentButton = $('#predictComponentButton');
+const predictElementButton = $('#predictElementButton');
 const contentBox = $('#contentBox');
 const hoverInfoBox = $('#hoverInfoBox');
 const contentDividingLine = $('#contentDividingLine');
@@ -72,6 +74,9 @@ const maohupiInfoButton = $('#maohupiInfoButton');
 	projectNameInput.addEventListener('change', () => {changeProjectName(projectNameInput.value);});
 	$('#loadImageButton').addEventListener('click', () => {importImage();});
 	$('#downloadImageButton').addEventListener('click', () => {exportImage(map);});
+
+	predictComponentButton.addEventListener('click', () => {modelTest('component');});
+	predictElementButton.addEventListener('click', () => {modelTest('element');});
 }
 
 // global

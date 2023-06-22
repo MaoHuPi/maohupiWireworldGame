@@ -8,16 +8,17 @@
 	<title>Wireworld Game Playground</title>
 	<link rel="stylesheet" href="style/main.css">
 	<script src="script/basic.js"></script>
-</head>
-<body>
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/tf-tflite.min.js"></script>
+	<script src="script/js-yaml.min.js"></script>
+</head>
+<body>
 	<div id="interfaceBox">
 		<div id="topBar" class="stepAsideParent">
 			<div id="tabButtons">
-				<button info="file">F</button>
-				<button info="edit">E</button>
-				<button info="view">V</button>
+				<button info="file" bgi="fileBtn">F</button>
+				<button info="edit" bgi="editBtn">E</button>
+				<button info="view" bgi="viewBtn">V</button>
 				<button info="settings">S</button>
 				<button info="info">I</button>
 			</div>
@@ -52,6 +53,11 @@
 							<button id="typeSwitch-0" class="smallInput" info="edit > draw with wire block">Y</button>
 							<button id="typeSwitch-1" class="smallInput" info="edit > draw with electric block">B</button>
 							<button id="typeSwitch-2" class="smallInput" info="edit > draw with stop block">R</button>
+						</fieldset>
+						<fieldset>
+							<legend>object predict</legend>
+							<button id="predictComponentButton" class="smallInput" style="width: 100%;" info="edit > predict component">component</button>
+							<button id="predictElementButton" class="smallInput" style="width: 100%;" info="edit > predict element">element</button>
 						</fieldset>
 					</div>
 					<div>&lt;view panel&gt;

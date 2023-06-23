@@ -945,6 +945,7 @@ let addNameRect, clearNameRect;
 
 	function pasteClipboard(){
 		function _(rangeData){
+			console.log(rangeData);
 			componentRect.moveDone();
 			componentRect.setData(rangeData);
 			let pos = posView2Map([view.width/2, view.height/2]);
@@ -966,8 +967,27 @@ let addNameRect, clearNameRect;
 						try{
 							rangeData = JSON.parse(text);
 						}
-						catch(error){alert('Paste formatting error!');}
+						catch(error){}
+						if(rangeData === false){
+							if(text.length > 0 && text.replace(/[ HhTt.\n\r]/g, '').length == 0){
+								text = text.toLowerCase().replaceAll('\r', '');
+								rangeData = new RangeData();
+								var rows = text.split('\n');
+								[rangeData.x, rangeData.y, rangeData.endX, rangeData.endY] = [0, 0, Math.max(...rows.map(row => row.length)), rows.length];
+								for(let ri = 0; ri < rows.length; ri++){
+									let row = rows[ri];
+									for(let ci = 0; ci < row.length; ci++){
+										let cell = rows[ri][ci];
+										if(cell !== ' '){
+											rangeData.map[`${ci},${ri}`] = {'.': 0, 'h': 1, 't': 2}[rows[ri][ci]];
+										}
+									}
+								}
+							}
+						};
+
 						if(rangeData !== false) _(rangeData);
+						else alert('Paste formatting error!');
 					});
 				}
 				else if(item.types.includes('image/png')){
